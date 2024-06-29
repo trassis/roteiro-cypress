@@ -13,11 +13,11 @@
         "serve": "http-server ./dist -p 7002 -c-1 --cors"
     },
     "dependencies": {
-        "cypress": "^13.11.0",
         "todomvc-app-css": "^2.4.2",
         "todomvc-common": "^1.0.5"
     },
     "devDependencies": {
+        "cypress": "^13.12.0",
         "http-server": "^14.1.1"
     }
 }

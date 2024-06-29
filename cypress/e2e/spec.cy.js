@@ -56,4 +56,59 @@ describe('template spec', () => {
     cy.get('.todo-list li')
       .should('have.length', 2);
   });
+
+  // Daqui para baixo eu fiz os testes:
+    
+  it('Marca tarefa como feita', () => {
+    cy.visit('http://127.0.0.1:7001'); 
+
+    cy.get('.new-todo')
+      .type('Vou fazer essa tarefa{enter}')
+
+    cy.get('.todo-list li .toggle')
+      .first()
+      .click();
+
+    cy.get('.todo-list li')
+      .first()
+      .should('have.class', 'completed');
+  });
+
+  it('Edita uma tarefa', () => {
+    cy.visit('http://127.0.0.1:7001'); 
+
+    cy.get('.new-todo')
+      .type('Vou editar isso{enter}')
+
+    cy.get('.todo-list li')
+      .dblclick();
+
+    cy.get('.todo-list li .edit')
+      .clear()
+      .type('Foi editado{enter}');
+
+    cy.get('.todo-list li')
+      .first()
+      .should('have.text', 'Foi editado');
+  });
+
+  it('Completa todas as tarefas', () => {
+    cy.visit('http://127.0.0.1:7001'); 
+
+    cy.get('.new-todo')
+      .type('Tarefa 1{enter}')
+      .type('Tarefa 2{enter}')
+      .type('Tarefa 3{enter}')
+
+    cy.get('.todo-list li')
+      .should('have.length', 3);
+
+    cy.get('.toggle-all-label').click();
+
+    cy.get('.clear-completed').click();
+
+    cy.get('.todo-list li')
+      .should('have.length', 0);
+
+  });
 });
